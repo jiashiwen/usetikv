@@ -1,8 +1,6 @@
-准备tikv开发环境的时候遇到点小坑
-
-# 麻烦是啥
-tikv是一个分布式的kv存储系统，开发环境免不了部署多个节点。手头资源不够的同学可以用pingcap官方给出的docker-compose方案（https://github.com/pingcap/tidb-docker-compose）。
-麻烦就从这里开始了。这个方案暴露到本地的端口只有tidb、grafana的端口（4000、 9090、3000）；pd、tikv的端口并没有暴露到本地。需要修改的地方有几处
+# tikv开发环境单机部署
+tikv是一个分布式的kv存储系统，开发环境免不了部署多个节点。手头资源不够的同学可以用pingcap官方给出的docker-compose方案<https://github.com/pingcap/tidb-docker-compose>。
+麻烦就从这里开始了。这个方案暴露到本地的端口只有tidb、grafana的端口（4000、 9090、3000）；pd、tikv的端口并没有暴露到本地。需要修改的地方有几处：
 * 为了保证容器内时间和宿主机时间一致，最好在每个"volumes"下添加"- /etc/localtime:/etc/localtime:ro"
 * 为容器pd0、pd1、pd2添加"ports"暴露端口号,由于我们要吧端口全部映射到本地所以三个pd节点使用不同的端口号。修改完的pd大概长这个样子
 ```
@@ -54,7 +52,7 @@ tikv是一个分布式的kv存储系统，开发环境免不了部署多个节�
     restart: on-failure
 
 ```
-* 修改好的docker-compose.yml在这里（https://github.com/jiashiwen/usetikv/blob/master/docker-compose.yml）,想省事儿的同学直接覆盖官方的docker-compse文件就可以了
+* 修改好的docker-compose.yml在这里<https://github.com/jiashiwen/usetikv/blob/master/docker-compose.yml>,想省事儿的同学直接覆盖官方的docker-compse文件就可以了
 * 最后修改一下本地/etc/hosts文件，pd及tikv都是通过hostname绑定的“advertise-client-urls”，不绑定hosts找不到找不到pd和tikv的节点
 ```
 127.0.0.1  pd0
