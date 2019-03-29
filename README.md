@@ -54,7 +54,7 @@ tikv是一个分布式的kv存储系统，开发环境免不了部署多个节�
     restart: on-failure
 
 ```
-* 修改好的docker-compose.yml在这里（https://github.com/jiashiwen/usetikv/docker-compose.yml）,想省事儿的同学直接覆盖官方的docker-compse文件就可以了
+* 修改好的docker-compose.yml在这里（https://github.com/jiashiwen/usetikv/blob/master/docker-compose.yml）,想省事儿的同学直接覆盖官方的docker-compse文件就可以了
 * 最后修改一下本地/etc/hosts文件，pd及tikv都是通过hostname绑定的“advertise-client-urls”，不绑定hosts找不到找不到pd和tikv的节点
 ```
 127.0.0.1  pd0
@@ -64,3 +64,5 @@ tikv是一个分布式的kv存储系统，开发环境免不了部署多个节�
 127.0.0.1  tikv1
 127.0.0.1  tikv2
 ```
+
+至此，环境搭建完毕，愉快的run demo吧。
